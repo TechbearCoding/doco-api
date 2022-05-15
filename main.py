@@ -1,15 +1,19 @@
-import sqlite3 as sqlite
 from flask import Flask
-from flask_restx import Resource, Api
+from flask_restx import Api
+from pathlib import Path
+from mainNamspace import api as ns 
 
+UPLOAD_FOLDER = Path(__file__).parent.absolute() 
+
+api = Api(
+    title='Document fill',
+    version='1.0',
+    description='Tool for auto filling contract ',
+)
+api.add_namespace(ns, path='/v1')
 
 app = Flask(__name__)
-api = Api(app)
-
-@api.route('/check')
-class Checker(Resource):
-    def get(self):
-        return 'It works!'
+api.init_app(app)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)

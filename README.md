@@ -18,17 +18,3 @@ If you get anything else- app is not functioning correctly.
 If you want to return all the data in JSON format just run http://127.0.0.1:8080/getAll
 Expected outcome should be all the data in JSON format, if there is no data, emoty brackets [] will be returned.
 
-To get data about specific record run  http://127.0.0.1:8080/user?id=number
-where number is record id for which record you want to return the values.
-
-To delete the data about specific record run DELETE  http://127.0.0.1:8080/user?id=number
-where number is record id for which record you want to return the values.
-
-To edit data about specific record run PUT http://127.0.0.1:8080/user?id=number&value=number2
-where number is record id for which record you want to return the values and number2 is value you want to update the record with.
-
-To add new record run POST  http://127.0.0.1:8080/user?value=number
-where number is value you want to add to database.
-
-To get data about statistics run http://127.0.0.1:8080/stat, expected outcome should be data in JSON format. 
-
