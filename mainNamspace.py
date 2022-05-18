@@ -1,16 +1,16 @@
-from flask_restx import Namespace, Resource, reqparse
+from flask_restx import Namespace, Resource, fields
 from flask import request
 from mailmerge import MailMerge
 
 
 api = Namespace('Document fill', description='Fill data')
-template = "contract.doc"
+template = "contract.docx"
 
 
-parser = reqparse.RequestParser()
-parser.add_argument('firstName', type=str, help='name')
-parser.add_argument('lastName', type=str, help='last names')
-
+model = api.model('Resource', {
+    'name': fields.String,
+    'lastName': fields.String
+})
 
 @api.route('/check')
 class Checker(Resource):
@@ -19,11 +19,13 @@ class Checker(Resource):
 
 @api.route('/fill')
 class Filler(Resource):
-    @api.doc(parser=parser)
+    @api.expect(model)
     def post(self):
-        args = parser.parse_args()
-        firstName = args['firstName']
-        lastName = args['lastName'] 
+        item = api.payload
+
+        firstName = item['name']
+        lastName =  item['lastName']
+
         document = MailMerge(template)
         document.merge(Name = firstName + ' ' + lastName)
         document.write('test-output.docx')
