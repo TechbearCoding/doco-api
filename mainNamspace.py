@@ -36,8 +36,8 @@ class Filler(Resource):
 
         firstName = item['name']
         lastName =  item['lastName']
-
         document = MailMerge(template)
+        
         document.merge(Name = firstName + ' ' + lastName)
         document.merge(companyName = item['companyName'])
         document.merge(regNr = item['regNr'])

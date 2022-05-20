@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restx import Api
 from pathlib import Path
 from mainNamspace import api as ns 
+from flask_cors import CORS
 
 UPLOAD_FOLDER = Path(__file__).parent.absolute() 
 
@@ -13,6 +14,7 @@ api = Api(
 api.add_namespace(ns, path='/v1')
 
 app = Flask(__name__)
+CORS(app)
 api.init_app(app)
 
 if __name__ == '__main__':
